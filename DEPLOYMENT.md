@@ -51,14 +51,14 @@ In Vercel:
 3. Add environment variables from `.env.example` if needed.
 4. Deploy.
 
-## 5. Stripe Later
+## 5. Stripe
 
-Checkout is currently a placeholder. When ready for real payments:
+Checkout now creates a Stripe Checkout Session. When ready for real payments:
 
 1. Create a Stripe account.
-2. Add products/prices in Stripe or create checkout sessions from the app.
-3. Add `STRIPE_SECRET_KEY` and `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`.
-4. Replace the placeholder checkout handler in `app/page.tsx`.
+2. Add `STRIPE_SECRET_KEY` to Vercel environment variables.
+3. Add `NEXT_PUBLIC_APP_URL` with the production domain.
+4. Keep test mode until products, shipping, tax, and fulfillment are verified.
 
 ## 6. Recommended Launch Order
 
