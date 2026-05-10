@@ -6,9 +6,12 @@ Web app inicial para **Laniakea Alta Reserve Coffee LLC**, una marca premium de 
 
 ```txt
 app/
+  api/checkout/route.ts
+  cancel/page.tsx
   globals.css
   layout.tsx
   page.tsx
+  success/page.tsx
 components/
   Cart.tsx
   Contact.tsx
@@ -45,7 +48,27 @@ http://localhost:3000
 - Colores premium: `tailwind.config.ts` y `app/globals.css`
 - Variables para correo, telefono y Stripe futuro: `.env.example`
 
-El boton de checkout todavia no procesa pagos reales. Esta preparado para conectar Stripe despues.
+## Stripe Checkout
+
+El checkout ya crea una sesion de Stripe desde `app/api/checkout/route.ts`.
+
+1. Crea un archivo `.env.local`.
+2. Copia las variables desde `.env.example`.
+3. Agrega tu llave secreta de prueba de Stripe:
+
+```bash
+STRIPE_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+4. Corre la app:
+
+```bash
+npm install
+npm run dev
+```
+
+Cuando el cliente presiona `Checkout`, la app lo envia a Stripe Checkout. Al terminar, Stripe lo regresa a `/success`; si cancela, regresa a `/cancel`.
 
 ## Publicacion
 
