@@ -13,6 +13,8 @@ import type { CartItem, Product } from "@/types";
 
 export default function Home() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [checkoutError, setCheckoutError] = useState("");
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   function addToCart(product: Product) {
     setCartItems((currentItems) => {
@@ -32,9 +34,40 @@ export default function Home() {
     setCartItems((currentItems) => currentItems.filter((item) => item.id !== productId));
   }
 
-  function handleCheckout() {
-    // TODO: Replace this alert with a Stripe Checkout integration.
-    alert("Checkout will be connected to Stripe in the next phase.");
+  async function handleCheckout() {
+    setCheckoutError("");
+    setCheckoutLoading(true);
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          items: cartItems.map((item) => ({
+            id: item.id,
+            quantity: item.quantity
+          }))
+        })
+      });
+
+      const data = (await response.json()) as { url?: string; error?: string };
+
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || "Stripe Checkout could not be started.");
+      }
+
+      window.location.href = data.url;
+    } catch (error) {
+      setCheckoutError(
+        error instanceof Error
+          ? error.message
+          : "Stripe Checkout could not be started."
+      );
+    } finally {
+      setCheckoutLoading(false);
+    }
   }
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -45,7 +78,13 @@ export default function Home() {
       <Hero />
       <Story />
       <Products products={products} onAddToCart={addToCart} />
-      <Cart cartItems={cartItems} onRemove={removeFromCart} onCheckout={handleCheckout} />
+      <Cart
+        cartItems={cartItems}
+        onRemove={removeFromCart}
+        onCheckout={handleCheckout}
+        checkoutError={checkoutError}
+        checkoutLoading={checkoutLoading}
+      />
       <Contact />
       <Footer />
     </main>
