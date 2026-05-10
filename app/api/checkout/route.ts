@@ -3,6 +3,8 @@ import Stripe from "stripe";
 import { products } from "@/data/products";
 import type { CheckoutLineItem } from "@/types";
 
+export const runtime = "nodejs";
+
 function getAppUrl(request: NextRequest) {
   return process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
 }
@@ -26,6 +28,16 @@ export async function POST(request: NextRequest) {
   if (!secretKey) {
     return NextResponse.json(
       { error: "Stripe is not configured. Add STRIPE_SECRET_KEY to .env.local." },
+      { status: 500 }
+    );
+  }
+
+  if (!secretKey.startsWith("sk_")) {
+    return NextResponse.json(
+      {
+        error:
+          "Stripe secret key is invalid. STRIPE_SECRET_KEY must start with sk_test_ or sk_live_."
+      },
       { status: 500 }
     );
   }
