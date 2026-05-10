@@ -4,9 +4,17 @@ type CartProps = {
   cartItems: CartItem[];
   onRemove: (productId: string) => void;
   onCheckout: () => void;
+  checkoutError?: string;
+  checkoutLoading?: boolean;
 };
 
-export function Cart({ cartItems, onRemove, onCheckout }: CartProps) {
+export function Cart({
+  cartItems,
+  onRemove,
+  onCheckout,
+  checkoutError,
+  checkoutLoading = false
+}: CartProps) {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -65,12 +73,14 @@ export function Cart({ cartItems, onRemove, onCheckout }: CartProps) {
           <button
             type="button"
             onClick={onCheckout}
-            disabled={cartItems.length === 0}
+            disabled={cartItems.length === 0 || checkoutLoading}
             className="mt-6 min-h-12 w-full bg-coffee-black px-5 text-sm font-bold uppercase tracking-[0.18em] text-coffee-gold transition hover:bg-coffee-roast disabled:cursor-not-allowed disabled:opacity-45"
           >
-            Checkout
+            {checkoutLoading ? "Opening Checkout..." : "Checkout"}
           </button>
-          {/* TODO: Replace onCheckout in app/page.tsx with a Stripe Checkout session call. */}
+          {checkoutError ? (
+            <p className="mt-4 text-sm leading-6 text-red-700">{checkoutError}</p>
+          ) : null}
         </div>
       </div>
     </section>
