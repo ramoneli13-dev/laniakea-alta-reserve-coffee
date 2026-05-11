@@ -27,9 +27,9 @@ export function Story() {
               with purpose, family, and respect for the land that gives it life.
             </p>
             <p>
-              The company was born in California on April 14, 2026, from the dream of a
-              Colombian family led by Madeline Guerrero: to bring premium Colombian coffee
-              to the United States with elegance, pride, and authenticity.
+             Más que una empresa de café, Laniakea es una expresión de legado, visión y excelencia, 
+             creada para compartir la esencia más fina del café colombiano.
+        
             </p>
             <p>
               Our coffee comes from Gramalote, Norte de Santander, Colombia, a mountain
