@@ -20,8 +20,9 @@ export function Products({ products, onAddToCart }: ProductsProps) {
             </h2>
           </div>
           <p className="max-w-md leading-7 text-coffee-cream/72">
-            Each product is a starter item for this first version. Replace the photos and
-            pricing when final packaging and retail strategy are ready.
+            Cada producto es un artículo inicial para esta primera versión. Sustituye
+            las fotos y los precios cuando el embalaje final y la estrategia de venta
+            al por menor estén listos.
           </p>
         </div>
 
