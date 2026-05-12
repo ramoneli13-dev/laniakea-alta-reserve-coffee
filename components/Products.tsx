@@ -20,9 +20,9 @@ export function Products({ products, onAddToCart }: ProductsProps) {
             </h2>
           </div>
           <p className="max-w-md leading-7 text-coffee-cream/72">
-            Cada producto es un artículo inicial para esta primera versión. Sustituye
-            las fotos y los precios cuando el embalaje final y la estrategia de venta
-            al por menor estén listos.
+            Esta primera colección marca el inicio de una visión más grande: construir
+            una marca de café premium con identidad, excelencia y crecimiento comercial
+            sostenible.
           </p>
         </div>
 
