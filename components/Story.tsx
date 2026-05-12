@@ -27,9 +27,8 @@ export function Story() {
               with purpose, family, and respect for the land that gives it life.
             </p>
             <p>
-             Más que una empresa de café, Laniakea es una expresión de legado, visión y excelencia, 
-             creada para compartir la esencia más fina del café colombiano.
-        
+              More than a coffee company, Laniakea is an expression of legacy, vision,
+              and excellence, created to share the finest essence of Colombian coffee.
             </p>
             <p>
               Our coffee comes from Gramalote, Norte de Santander, Colombia, a mountain
@@ -38,7 +37,7 @@ export function Story() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {["Gramalote Origin", "California Born", "Alta Reserve"].map((item) => (
+            {["Gramalote Origin", "California Vision", "Alta Reserve"].map((item) => (
               <div key={item} className="border border-coffee-gold/40 bg-white/55 p-5">
                 <span className="text-sm font-bold uppercase tracking-[0.18em] text-coffee-roast">
                   {item}
