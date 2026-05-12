@@ -4,7 +4,7 @@ type CartProps = {
   cartItems: CartItem[];
   onRemove: (productId: string) => void;
   onCheckout: () => void;
-  checkoutError?: string;
+  checkoutError?: string | null;
   checkoutLoading?: boolean;
 };
 
