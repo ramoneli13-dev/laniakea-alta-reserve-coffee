@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     siteName: "Laniakea Alta Reserve Coffee",
     images: [
       {
-        url: "/images/laniakea-official.png",
-        width: 1024,
-        height: 1536,
-        alt: "Laniakea Alta Reserve Coffee official brand image"
+        url: "/images/laniakea-cover.jpg",
+        width: 1920,
+        height: 1080,
+        alt: "Laniakea Alta Reserve Coffee premium Colombian coffee cover artwork"
       }
     ],
     type: "website"
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: "Laniakea Alta Reserve Coffee",
     description:
       "Premium Colombian coffee from Gramalote, Norte de Santander, Colombia, crafted for California and the United States.",
-    images: ["/images/laniakea-official.png"]
+    images: ["/images/laniakea-cover.jpg"]
   }
 };
 
