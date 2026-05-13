@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Laniakea Alta Reserve Coffee premium Colombian coffee artwork</title>
+  <desc id="desc">Dark luxury Colombian coffee brand artwork with mountains, coffee beans, gold accents, cultural patterning, and the phrase Prueben y vean que el Señor es bueno Salmo 34:8.</desc>
+  <defs>
+    <radialGradient id="warmGlow" cx="72%" cy="34%" r="62%">
+      <stop offset="0" stop-color="#c99a49" stop-opacity="0.34" />
+      <stop offset="0.42" stop-color="#6e3f1e" stop-opacity="0.22" />
+      <stop offset="1" stop-color="#060403" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="midnight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050302" />
+      <stop offset="0.42" stop-color="#160b06" />
+      <stop offset="0.72" stop-color="#2a160b" />
+      <stop offset="1" stop-color="#070403" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff2c8" />
+      <stop offset="0.35" stop-color="#d8ad58" />
+      <stop offset="0.72" stop-color="#9d6b24" />
+      <stop offset="1" stop-color="#f5d890" />
+    </linearGradient>
+    <linearGradient id="mountainGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c99a49" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#090504" stop-opacity="0.18" />
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.55" />
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="34" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.14" />
+      </feComponentTransfer>
+    </filter>
+    <pattern id="woven" width="84" height="84" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <path d="M0 42H84M42 0V84" stroke="#c99a49" stroke-opacity="0.14" stroke-width="2" />
+      <path d="M21 21h42v42H21z" fill="none" stroke="#f1d28a" stroke-opacity="0.07" stroke-width="2" />
+    </pattern>
+    <g id="bean">
+      <ellipse cx="0" cy="0" rx="34" ry="52" fill="#3a1c0c" stroke="#b98434" stroke-opacity="0.55" stroke-width="3" />
+      <path d="M-3 -42C18 -14 14 13 -4 44" fill="none" stroke="#d8ad58" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round" />
+    </g>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#midnight)" />
+  <rect width="1920" height="1080" fill="url(#warmGlow)" />
+  <rect width="1920" height="1080" fill="url(#woven)" opacity="0.5" />
+  <rect width="1920" height="1080" filter="url(#grain)" opacity="0.48" />
+
+  <path d="M0 702L182 602L330 658L492 500L650 620L810 430L1018 622L1162 548L1320 662L1484 482L1660 620L1920 520V1080H0Z" fill="#080403" opacity="0.74" />
+  <path d="M0 742L214 644L372 704L540 560L710 684L865 506L1040 686L1202 596L1368 710L1510 572L1680 700L1920 606V1080H0Z" fill="url(#mountainGold)" opacity="0.66" />
+  <path d="M0 782L220 702L420 760L612 650L788 760L944 628L1140 762L1320 682L1512 782L1690 692L1920 748V1080H0Z" fill="#0d0705" opacity="0.92" />
+
+  <circle cx="1516" cy="292" r="210" fill="#c99a49" opacity="0.1" />
+  <circle cx="1516" cy="292" r="142" fill="none" stroke="url(#gold)" stroke-opacity="0.24" stroke-width="2" />
+  <circle cx="1516" cy="292" r="98" fill="none" stroke="#f3d590" stroke-opacity="0.14" stroke-width="1" />
+
+  <g opacity="0.95" filter="url(#softShadow)">
+    <use href="#bean" x="1450" y="735" transform="rotate(-22 1450 735)" />
+    <use href="#bean" x="1520" y="804" transform="rotate(18 1520 804) scale(.86)" />
+    <use href="#bean" x="1378" y="818" transform="rotate(31 1378 818) scale(.72)" />
+    <use href="#bean" x="1604" y="705" transform="rotate(45 1604 705) scale(.66)" />
+  </g>
+
+  <g transform="translate(1080 565) rotate(-7)" opacity="0.92" filter="url(#softShadow)">
+    <path d="M0 0h340c28 0 50 22 50 50v240c0 28-22 50-50 50H0c-28 0-50-22-50-50V50C-50 22-28 0 0 0Z" fill="#211008" stroke="url(#gold)" stroke-width="4" />
+    <path d="M-20 32h380v78H-20Z" fill="#080403" opacity="0.62" />
+    <text x="170" y="83" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="32" fill="#f7ddb0" letter-spacing="3">ALTA RESERVE</text>
+    <text x="170" y="176" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="58" fill="url(#gold)">Laniakea</text>
+    <text x="170" y="230" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#f1d28a" letter-spacing="6">COLOMBIAN COFFEE</text>
+    <path d="M30 270h280" stroke="url(#gold)" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <g filter="url(#softShadow)">
+    <text x="150" y="214" font-family="Georgia, 'Times New Roman', serif" font-size="84" fill="url(#gold)">Laniakea Alta</text>
+    <text x="154" y="276" font-family="Arial, sans-serif" font-size="30" fill="#f6dfb6" letter-spacing="9">RESERVE COFFEE</text>
+    <path d="M154 306h520" stroke="url(#gold)" stroke-width="3" opacity="0.75" />
+  </g>
+
+  <g transform="translate(150 420)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="780" height="262" rx="0" fill="#070403" fill-opacity="0.58" stroke="#c99a49" stroke-opacity="0.42" />
+    <text x="54" y="78" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#fff1cf">Prueben y vean que el Señor es bueno</text>
+    <text x="55" y="132" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#d8ad58">Salmo 34:8</text>
+    <path d="M55 164h330" stroke="#d8ad58" stroke-opacity="0.72" stroke-width="2" />
+    <text x="55" y="218" font-family="Arial, sans-serif" font-size="20" fill="#d9c3a0" letter-spacing="4">ORIGEN COLOMBIANO • FE • EXCELENCIA</text>
+  </g>
+
+  <g opacity="0.55">
+    <path d="M156 908c112-54 212-54 300 0s188 54 300 0 212-54 300 0 188 54 300 0" fill="none" stroke="#c99a49" stroke-width="2" stroke-opacity="0.28" />
+    <path d="M156 946c112-54 212-54 300 0s188 54 300 0 212-54 300 0 188 54 300 0" fill="none" stroke="#f1d28a" stroke-width="2" stroke-opacity="0.16" />
+  </g>
+</svg>
