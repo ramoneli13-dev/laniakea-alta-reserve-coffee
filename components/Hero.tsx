@@ -4,14 +4,15 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-screen overflow-hidden pt-24">
       <Image
-        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=2200&q=90"
-        alt="Premium coffee being prepared with a warm luxury atmosphere"
+        src="/images/laniakea-official.png"
+        alt="Laniakea Alta Reserve Coffee official family brand image overlooking the California hills"
         fill
         priority
-        className="object-cover"
+        sizes="100vw"
+        className="object-contain object-center opacity-95"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-coffee-black via-coffee-black/78 to-coffee-black/34" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(201,164,92,0.22),transparent_30rem)]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-coffee-black via-coffee-black/82 to-coffee-black/18" />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-coffee-black to-transparent" />
 
       <div className="relative z-10 mx-auto grid min-h-[calc(100vh-6rem)] max-w-7xl content-center px-5 pb-16 md:px-8">
         <div className="max-w-3xl">
