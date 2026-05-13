@@ -1,17 +1,12 @@
-import Image from "next/image";
-
 export function Hero() {
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden pt-24">
-      <Image
-        src="/images/laniakea-official.png"
-        alt="Laniakea Alta Reserve Coffee official family brand image overlooking the California hills"
-        fill
-        priority
-        sizes="100vw"
-        className="object-contain object-center opacity-95"
+    <section id="home" className="relative min-h-screen overflow-hidden bg-coffee-black pt-24">
+      <img
+        src="/images/laniakea-premium-hero.svg"
+        alt="Premium Laniakea Alta Reserve Coffee artwork with Colombian mountains, coffee beans, gold accents, and Psalm 34:8"
+        className="absolute inset-0 h-full w-full object-cover object-center opacity-95"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-coffee-black via-coffee-black/82 to-coffee-black/18" />
+      <div className="absolute inset-0 bg-gradient-to-r from-coffee-black via-coffee-black/66 to-coffee-black/10" />
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-coffee-black to-transparent" />
 
       <div className="relative z-10 mx-auto grid min-h-[calc(100vh-6rem)] max-w-7xl content-center px-5 pb-16 md:px-8">
