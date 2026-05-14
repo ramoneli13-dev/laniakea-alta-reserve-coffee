@@ -69,7 +69,7 @@ export function Contact() {
             Contacto
           </p>
           <h2 className="font-serif text-4xl leading-tight text-coffee-parchment md:text-6xl">
-            Lleva Laniakea a tu hogar, oficina, cafe o boutique.
+            Lleva Laniakea a tu hogar, oficina, café o boutique.
           </h2>
           <p className="mt-6 text-lg leading-8 text-coffee-cream/76">
             Escríbenos para pedidos, degustaciones, venta al por mayor o alianzas.
@@ -84,7 +84,7 @@ export function Contact() {
               Venta al por mayor
             </h3>
             <p className="mt-3 leading-7 text-coffee-cream/76">
-              Para restaurantes, cafes, oficinas, hoteles y tiendas especializadas,
+              Para restaurantes, cafés, oficinas, hoteles y tiendas especializadas,
               pregunta por suministro recurrente, formatos comerciales y opciones de
               degustación privada.
             </p>
@@ -106,7 +106,7 @@ export function Contact() {
             />
           </label>
           <label className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-coffee-gold">
-            Correo electronico
+            Correo electrónico
             <input
               required
               type="email"
@@ -117,7 +117,7 @@ export function Contact() {
             />
           </label>
           <label className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-coffee-gold">
-            Telefono
+            Teléfono
             <input
               name="phone"
               type="tel"
@@ -156,7 +156,7 @@ export function Contact() {
             disabled={isSubmitting}
             className="min-h-12 bg-coffee-gold px-5 text-sm font-bold uppercase tracking-[0.18em] text-coffee-black transition hover:bg-coffee-cream disabled:cursor-not-allowed disabled:bg-coffee-gold/50"
           >
-            {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+            {isSubmitting ? "Enviando…" : "Enviar mensaje"}
           </button>
           {statusMessage ? (
             <p
