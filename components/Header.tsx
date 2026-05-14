@@ -8,7 +8,7 @@ type HeaderProps = {
 
 const navLinks = [
   { href: "#story", label: "Historia" },
-  { href: "#products", label: "Cafe" },
+  { href: "#products", label: "Café" },
   { href: "#wholesale", label: "Venta al por mayor" },
   { href: "#contact", label: "Contacto" },
 ];
@@ -74,7 +74,7 @@ export function Header({ cartCount }: HeaderProps) {
           <a
             href="#products"
             className="hidden items-center gap-2 rounded-[6px] border border-coffee-gold/55 bg-coffee-gold/12 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.16em] text-coffee-gold transition hover:bg-coffee-gold hover:text-coffee-black md:inline-flex"
-            aria-label={`Comprar cafe, carrito con ${cartCount} productos`}
+            aria-label={`Comprar café, carrito con ${cartCount} productos`}
             title={`Carrito (${cartCount})`}
           >
             Comprar
@@ -83,7 +83,7 @@ export function Header({ cartCount }: HeaderProps) {
           <button
             type="button"
             className="grid h-9 w-9 place-items-center rounded-[6px] border border-coffee-gold/40 bg-coffee-black/35 text-coffee-gold transition hover:bg-coffee-gold hover:text-coffee-black md:hidden"
-            aria-label="Abrir menu"
+            aria-label="Abrir menú"
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(true)}
           >
@@ -100,7 +100,7 @@ export function Header({ cartCount }: HeaderProps) {
         <button
           type="button"
           className="fixed inset-0 z-[60] bg-coffee-black/58 backdrop-blur-sm md:hidden"
-          aria-label="Cerrar menu"
+          aria-label="Cerrar menú"
           onClick={closeMenu}
         />
       ) : null}
@@ -128,7 +128,7 @@ export function Header({ cartCount }: HeaderProps) {
           <button
             type="button"
             className="grid h-9 w-9 place-items-center rounded-[6px] border border-coffee-gold/35 text-coffee-gold transition hover:bg-coffee-gold hover:text-coffee-black"
-            aria-label="Cerrar menu"
+            aria-label="Cerrar menú"
             onClick={closeMenu}
           >
             <span className="relative h-4 w-4" aria-hidden="true">
