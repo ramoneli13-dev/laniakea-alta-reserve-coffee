@@ -87,29 +87,45 @@ export async function POST(request: NextRequest) {
   }
 
   if (!process.env.RESEND_API_KEY) {
+    console.error("Contact email is not configured: missing RESEND_API_KEY.");
     return NextResponse.json({ error: "Email service is not configured." }, { status: 500 });
   }
 
   const fromEmail = process.env.RESEND_FROM_EMAIL || "Laniakea Coffee <onboarding@resend.dev>";
   const subject = `Nuevo mensaje de ${payload.name} - Laniakea Coffee`;
 
-  const resendResponse = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from: fromEmail,
-      to: CONTACT_EMAIL,
-      reply_to: payload.email,
-      subject,
-      text: buildEmailText(payload),
-      html: buildEmailHtml(payload),
-    }),
-  });
+  try {
+    const resendResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [CONTACT_EMAIL],
+        reply_to: [payload.email],
+        subject,
+        text: buildEmailText(payload),
+        html: buildEmailHtml(payload),
+      }),
+    });
 
-  if (!resendResponse.ok) {
+    if (!resendResponse.ok) {
+      const resendError = await resendResponse.text();
+      console.error("Resend contact email failed", {
+        status: resendResponse.status,
+        error: resendError,
+      });
+
+      return NextResponse.json(
+        { error: "Contact message could not be sent." },
+        { status: 502 }
+      );
+    }
+  } catch (error) {
+    console.error("Contact email request failed", error);
+
     return NextResponse.json(
       { error: "Contact message could not be sent." },
       { status: 502 }
