@@ -4,6 +4,24 @@ import { FormEvent, useState } from "react";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+type ContactResponse = {
+  ok?: boolean;
+  code?: string;
+  error?: string;
+};
+
+function getErrorMessage(code?: string) {
+  if (code === "missing_resend_api_key") {
+    return "El formulario todavía no tiene configurado RESEND_API_KEY en Vercel.";
+  }
+
+  if (code === "invalid_contact_email") {
+    return "El correo de destino del formulario no está configurado correctamente.";
+  }
+
+  return "No pudimos enviar tu mensaje en este momento. Por favor intenta nuevamente.";
+}
+
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
@@ -42,19 +60,21 @@ export function Contact() {
         }),
       });
 
+      const data = (await response.json().catch(() => ({}))) as ContactResponse;
+
       if (!response.ok) {
-        throw new Error("Contact request failed.");
+        throw new Error(data.code || "contact_request_failed");
       }
 
       setStatus("success");
       setStatusMessage(
-        "Gracias por escribirnos. Hemos recibido tu mensaje y te responderemos pronto."
+        "Gracias por escribirnos. Hemos recibido tu mensaje y te responderemos muy pronto."
       );
       form.reset();
-    } catch {
+    } catch (error) {
       setStatus("error");
       setStatusMessage(
-        "No pudimos enviar tu mensaje en este momento. Por favor intenta nuevamente."
+        getErrorMessage(error instanceof Error ? error.message : undefined)
       );
     } finally {
       setIsSubmitting(false);
