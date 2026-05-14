@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const CONTACT_EMAIL = process.env.CONTACT_TO_EMAIL || "ramoneli13@gmail.com";
+const DEFAULT_FROM_EMAIL = "onboarding@resend.dev";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload = {
@@ -17,6 +18,16 @@ function getString(body: Record<string, unknown>, key: keyof ContactPayload) {
   const value = body[key];
 
   return typeof value === "string" ? value.trim() : "";
+}
+
+function formatFromEmail(value?: string) {
+  const email = value?.trim() || DEFAULT_FROM_EMAIL;
+
+  if (email.includes("<") && email.includes(">")) {
+    return email;
+  }
+
+  return `Laniakea Coffee <${email}>`;
 }
 
 function escapeHtml(value: string) {
@@ -98,7 +109,7 @@ export async function POST(request: NextRequest) {
   }
 
   const resendApiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.RESEND_FROM_EMAIL || "Laniakea Coffee <onboarding@resend.dev>";
+  const fromEmail = formatFromEmail(process.env.RESEND_FROM_EMAIL);
 
   if (!resendApiKey) {
     console.error("Contact email is not configured: missing RESEND_API_KEY.");
