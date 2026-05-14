@@ -5,9 +5,9 @@ export function Footer() {
         <p className="font-serif text-xl text-coffee-parchment">
           Laniakea Alta Reserve Coffee
         </p>
-        <p className="text-sm">
-          Born in California on April 14, 2026. Colombian coffee from Gramalote,
-          Norte de Santander.
+        <p className="max-w-2xl text-sm leading-relaxed">
+          Laniakea nació del sueño de llevar el verdadero sabor del café
+          colombiano a quienes saben apreciar algo auténtico.
         </p>
       </div>
     </footer>
