@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 const CONTACT_EMAIL = process.env.CONTACT_TO_EMAIL || "ramoneli13@gmail.com";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -67,7 +69,10 @@ export async function POST(request: NextRequest) {
   try {
     body = (await request.json()) as Record<string, unknown>;
   } catch {
-    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
+    return NextResponse.json(
+      { code: "invalid_body", error: "Invalid request body." },
+      { status: 400 }
+    );
   }
 
   const payload: ContactPayload = {
@@ -79,32 +84,52 @@ export async function POST(request: NextRequest) {
   };
 
   if (!payload.name || !payload.email || !payload.message) {
-    return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
+    return NextResponse.json(
+      { code: "missing_fields", error: "Name, email, and message are required." },
+      { status: 400 }
+    );
   }
 
   if (!EMAIL_REGEX.test(payload.email)) {
-    return NextResponse.json({ error: "A valid email is required." }, { status: 400 });
+    return NextResponse.json(
+      { code: "invalid_email", error: "A valid email is required." },
+      { status: 400 }
+    );
   }
 
-  if (!process.env.RESEND_API_KEY) {
-    console.error("Contact email is not configured: missing RESEND_API_KEY.");
-    return NextResponse.json({ error: "Email service is not configured." }, { status: 500 });
-  }
-
+  const resendApiKey = process.env.RESEND_API_KEY;
   const fromEmail = process.env.RESEND_FROM_EMAIL || "Laniakea Coffee <onboarding@resend.dev>";
-  const subject = `Nuevo mensaje de ${payload.name} - Laniakea Coffee`;
+
+  if (!resendApiKey) {
+    console.error("Contact email is not configured: missing RESEND_API_KEY.");
+    return NextResponse.json(
+      { code: "missing_resend_api_key", error: "Email service is not configured." },
+      { status: 500 }
+    );
+  }
+
+  if (!EMAIL_REGEX.test(CONTACT_EMAIL)) {
+    console.error("Contact email is not configured: invalid CONTACT_TO_EMAIL.");
+    return NextResponse.json(
+      { code: "invalid_contact_email", error: "Email destination is not configured." },
+      { status: 500 }
+    );
+  }
+
+  const subjectType = payload.inquiryType || "Consulta general";
+  const subject = `Nuevo mensaje de ${payload.name} - ${subjectType}`;
 
   try {
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        Authorization: `Bearer ${resendApiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         from: fromEmail,
-        to: [CONTACT_EMAIL],
-        reply_to: [payload.email],
+        to: CONTACT_EMAIL,
+        reply_to: payload.email,
         subject,
         text: buildEmailText(payload),
         html: buildEmailHtml(payload),
@@ -116,10 +141,12 @@ export async function POST(request: NextRequest) {
       console.error("Resend contact email failed", {
         status: resendResponse.status,
         error: resendError,
+        from: fromEmail,
+        to: CONTACT_EMAIL,
       });
 
       return NextResponse.json(
-        { error: "Contact message could not be sent." },
+        { code: "resend_rejected", error: "Contact message could not be sent." },
         { status: 502 }
       );
     }
@@ -127,7 +154,7 @@ export async function POST(request: NextRequest) {
     console.error("Contact email request failed", error);
 
     return NextResponse.json(
-      { error: "Contact message could not be sent." },
+      { code: "email_request_failed", error: "Contact message could not be sent." },
       { status: 502 }
     );
   }
