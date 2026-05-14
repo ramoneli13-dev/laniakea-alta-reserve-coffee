@@ -19,6 +19,14 @@ function getErrorMessage(code?: string) {
     return "El correo de destino del formulario no está configurado correctamente.";
   }
 
+  if (code === "resend_rejected") {
+    return "Resend rechazó el envío. Revisa que RESEND_FROM_EMAIL use un dominio verificado en Resend.";
+  }
+
+  if (code === "email_request_failed") {
+    return "No pudimos conectar con el servicio de correo. Por favor intenta nuevamente.";
+  }
+
   return "No pudimos enviar tu mensaje en este momento. Por favor intenta nuevamente.";
 }
 
