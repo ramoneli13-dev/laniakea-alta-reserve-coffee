@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CancelPage() {
   return (
     <main className="grid min-h-screen place-items-center bg-coffee-black px-5 py-20 text-coffee-cream">
@@ -12,12 +14,12 @@ export default function CancelPage() {
           No payment was processed. Return to the store when you are ready to complete
           your Laniakea order.
         </p>
-        <a
+        <Link
           href="/#cart"
           className="mt-8 inline-flex min-h-12 items-center justify-center bg-coffee-gold px-7 text-sm font-bold uppercase tracking-[0.18em] text-coffee-black transition hover:bg-coffee-cream"
         >
           Return to Cart
-        </a>
+        </Link>
       </section>
     </main>
   );

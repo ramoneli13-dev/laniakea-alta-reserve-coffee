@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Products } from "@/components/Products";
-import { Story } from "@/components/Story";
+import { BrandSections } from "@/components/BrandSections";
 import { products } from "@/data/products";
 import type { CartItem, Product } from "@/types";
 
@@ -76,7 +76,7 @@ export default function Home() {
     <main>
       <Header cartCount={cartCount} />
       <Hero />
-      <Story />
+      <BrandSections />
       <Products products={products} onAddToCart={addToCart} />
       <Cart
         cartItems={cartItems}
