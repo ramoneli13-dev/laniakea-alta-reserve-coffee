@@ -23,11 +23,13 @@ export function BrandSections() {
   return (
     <div className="bg-coffee-parchment text-coffee-black">
       <section id="origen" className="mx-auto max-w-7xl px-5 py-24 md:px-8">
-        <p className="mb-4 text-sm font-bold uppercase tracking-[0.28em] text-coffee-gold">
-          Nuestro productor aliado
+        <p className="mb-3 text-sm font-bold uppercase tracking-[0.28em] text-coffee-gold">
+          Origen y trazabilidad
         </p>
-        <h2 className="font-serif text-4xl leading-tight md:text-6xl">Domingo Torres</h2>
-        <div className="mt-8 grid gap-4 text-lg leading-8 text-coffee-roast md:grid-cols-2">
+        <h2 className="max-w-4xl font-serif text-3xl leading-tight md:text-5xl">
+          Nuestro productor aliado: <span className="text-coffee-espresso">Domingo Torres</span>
+        </h2>
+        <div className="mt-7 grid gap-4 text-lg leading-8 text-coffee-roast md:grid-cols-2">
           <p>Productor colombiano nacido en Guapi, Cauca.</p>
           <p>Caficultor establecido en Ragonvalia, Norte de Santander.</p>
           <p>Reconocido por producir cafés especiales de alta calidad.</p>
