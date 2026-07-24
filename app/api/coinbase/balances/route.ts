@@ -79,6 +79,7 @@ function createCoinbaseJwt(method: string, requestPath: string) {
     typ: "JWT",
   };
   const payload = {
+    aud: ["cdp_service"],
     exp: now + 120,
     iat: now,
     iss: "cdp",
