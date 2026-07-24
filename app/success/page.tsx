@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function SuccessPage() {
   return (
     <main className="grid min-h-screen place-items-center bg-coffee-black px-5 py-20 text-coffee-cream">
@@ -12,12 +14,12 @@ export default function SuccessPage() {
           Your Stripe payment was completed. A receipt and order follow-up can be
           connected here in the next fulfillment phase.
         </p>
-        <a
+        <Link
           href="/"
           className="mt-8 inline-flex min-h-12 items-center justify-center bg-coffee-gold px-7 text-sm font-bold uppercase tracking-[0.18em] text-coffee-black transition hover:bg-coffee-cream"
         >
           Back to Laniakea
-        </a>
+        </Link>
       </section>
     </main>
   );

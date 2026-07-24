@@ -73,3 +73,26 @@ Cuando el cliente presiona `Checkout`, la app lo envia a Stripe Checkout. Al ter
 ## Publicacion
 
 Ver `DEPLOYMENT.md` para el paso a paso de GitHub, Vercel y Stripe.
+
+## Coinbase Advanced API balances
+
+La ruta `GET /api/coinbase/balances` consulta `GET /api/v3/brokerage/accounts` de Coinbase Advanced API desde el servidor y devuelve balances en JSON sin enviar claves al cliente. La autenticacion usa JWT Ed25519 (`alg: EdDSA`) con el secreto base64 de Coinbase.
+
+Variables requeridas en `.env.local` o Vercel:
+
+```bash
+COINBASE_ADVANCED_API_KEY=organizations/{org_id}/apiKeys/{key_id}
+COINBASE_ADVANCED_PRIVATE_KEY=base64_ed25519_key_secret
+```
+
+Variable opcional recomendada para proteger el endpoint de balances:
+
+```bash
+COINBASE_BALANCES_ACCESS_TOKEN=un-token-interno-largo-y-seguro
+```
+
+Si configuras `COINBASE_BALANCES_ACCESS_TOKEN`, llama la ruta con:
+
+```bash
+curl -H "Authorization: Bearer $COINBASE_BALANCES_ACCESS_TOKEN" http://localhost:3000/api/coinbase/balances
+```
