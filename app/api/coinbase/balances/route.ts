@@ -123,10 +123,10 @@ async function fetchCoinbaseAccounts() {
 
     if (cursor) query.set("cursor", cursor);
 
-    const requestPath = `${COINBASE_ACCOUNTS_PATH}?${query.toString()}`;
-    const response = await fetch(`https://${COINBASE_API_HOST}${requestPath}`, {
+    const requestUrl = `${COINBASE_ACCOUNTS_PATH}?${query.toString()}`;
+    const response = await fetch(`https://${COINBASE_API_HOST}${requestUrl}`, {
       headers: {
-        Authorization: `Bearer ${createCoinbaseJwt("GET", requestPath)}`,
+        Authorization: `Bearer ${createCoinbaseJwt("GET", COINBASE_ACCOUNTS_PATH)}`,
         "Content-Type": "application/json",
       },
       method: "GET",
