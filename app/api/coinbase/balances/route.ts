@@ -9,6 +9,11 @@ const COINBASE_ACCOUNTS_PATH = "/api/v3/brokerage/accounts";
 const MAX_PAGES = 20;
 const PAGE_LIMIT = 250;
 
+type CoinbaseMoney = {
+  value?: string;
+  currency?: string;
+};
+
 type CoinbaseAccount = {
   uuid?: string;
   name?: string;
@@ -19,11 +24,6 @@ type CoinbaseAccount = {
   active?: boolean;
   type?: string;
   ready?: boolean;
-};
-
-type CoinbaseMoney = {
-  value?: string;
-  currency?: string;
 };
 
 type CoinbaseAccountsResponse = {
@@ -40,72 +40,43 @@ function base64UrlEncode(input: Buffer | string) {
     .replace(/\//g, "_");
 }
 
-function normalizePrivateKey(privateKey: string) {
-  return privateKey.replace(/\\n/g, "\n").trim();
-}
+function createEd25519PrivateKey(secret: string) {
+  const normalized = secret.trim().replace(/^['"]|['"]$/g, "");
+  const raw = Buffer.from(normalized, "base64");
 
-function derToJoseSignature(signature: Buffer) {
-  let offset = 0;
-
-  if (signature[offset++] !== 0x30) {
-    throw new Error("Invalid ECDSA signature format.");
+  if (raw.length !== 64 && raw.length !== 32) {
+    throw new Error(
+      `COINBASE_ADVANCED_PRIVATE_KEY must decode to 64 bytes, or a 32-byte Ed25519 seed. Received ${raw.length} bytes.`,
+    );
   }
 
-  const sequenceLength = signature[offset++];
+  const seed = raw.subarray(0, 32);
+  const pkcs8Prefix = Buffer.from("302e020100300506032b657004220420", "hex");
 
-  if (sequenceLength + 2 !== signature.length) {
-    throw new Error("Invalid ECDSA signature length.");
-  }
-
-  if (signature[offset++] !== 0x02) {
-    throw new Error("Invalid ECDSA signature integer.");
-  }
-
-  const rLength = signature[offset++];
-  const r = signature.subarray(offset, offset + rLength);
-  offset += rLength;
-
-  if (signature[offset++] !== 0x02) {
-    throw new Error("Invalid ECDSA signature integer.");
-  }
-
-  const sLength = signature[offset++];
-  const s = signature.subarray(offset, offset + sLength);
-
-  return Buffer.concat([normalizeInteger(r), normalizeInteger(s)]);
-}
-
-function normalizeInteger(integer: Buffer) {
-  const positiveInteger = integer[0] === 0 ? integer.subarray(1) : integer;
-
-  if (positiveInteger.length > 32) {
-    return positiveInteger.subarray(positiveInteger.length - 32);
-  }
-
-  if (positiveInteger.length < 32) {
-    return Buffer.concat([Buffer.alloc(32 - positiveInteger.length), positiveInteger]);
-  }
-
-  return positiveInteger;
+  return createPrivateKey({
+    key: Buffer.concat([pkcs8Prefix, seed]),
+    format: "der",
+    type: "pkcs8",
+  });
 }
 
 function createCoinbaseJwt(method: string, requestPath: string) {
   const keyName = process.env.COINBASE_ADVANCED_API_KEY;
-  const privateKey = process.env.COINBASE_ADVANCED_PRIVATE_KEY;
+  const privateKeySecret = process.env.COINBASE_ADVANCED_PRIVATE_KEY;
 
-  if (!keyName || !privateKey) {
+  if (!keyName || !privateKeySecret) {
     throw new Error(
-      "Coinbase Advanced API is not configured. Add COINBASE_ADVANCED_API_KEY and COINBASE_ADVANCED_PRIVATE_KEY."
+      "Coinbase Advanced API is not configured. Add COINBASE_ADVANCED_API_KEY and COINBASE_ADVANCED_PRIVATE_KEY.",
     );
   }
 
   const now = Math.floor(Date.now() / 1000);
   const uri = `${method.toUpperCase()} ${COINBASE_API_HOST}${requestPath}`;
   const header = {
-    alg: "ES256",
+    alg: "EdDSA",
     kid: keyName,
     nonce: randomBytes(16).toString("hex"),
-    typ: "JWT"
+    typ: "JWT",
   };
   const payload = {
     exp: now + 120,
@@ -113,20 +84,18 @@ function createCoinbaseJwt(method: string, requestPath: string) {
     iss: "cdp",
     nbf: now,
     sub: keyName,
-    uri
+    uri,
   };
   const tokenBody = `${base64UrlEncode(JSON.stringify(header))}.${base64UrlEncode(
-    JSON.stringify(payload)
+    JSON.stringify(payload),
   )}`;
-  const keyObject = createPrivateKey(normalizePrivateKey(privateKey));
-  const derSignature = sign("SHA256", Buffer.from(tokenBody), keyObject);
-  const joseSignature = derToJoseSignature(derSignature);
+  const signature = sign(
+    null,
+    Buffer.from(tokenBody),
+    createEd25519PrivateKey(privateKeySecret),
+  );
 
-  return `${tokenBody}.${base64UrlEncode(joseSignature)}`;
-}
-
-function getBearerToken(requestPath: string) {
-  return createCoinbaseJwt("GET", requestPath);
+  return `${tokenBody}.${base64UrlEncode(signature)}`;
 }
 
 function getSafeAccount(account: CoinbaseAccount) {
@@ -139,7 +108,7 @@ function getSafeAccount(account: CoinbaseAccount) {
     default: account.default,
     active: account.active,
     type: account.type,
-    ready: account.ready
+    ready: account.ready,
   };
 }
 
@@ -151,24 +120,22 @@ async function fetchCoinbaseAccounts() {
   do {
     const query = new URLSearchParams({ limit: String(PAGE_LIMIT) });
 
-    if (cursor) {
-      query.set("cursor", cursor);
-    }
+    if (cursor) query.set("cursor", cursor);
 
     const requestPath = `${COINBASE_ACCOUNTS_PATH}?${query.toString()}`;
     const response = await fetch(`https://${COINBASE_API_HOST}${requestPath}`, {
       headers: {
-        Authorization: `Bearer ${getBearerToken(requestPath)}`,
-        "Content-Type": "application/json"
+        Authorization: `Bearer ${createCoinbaseJwt("GET", requestPath)}`,
+        "Content-Type": "application/json",
       },
       method: "GET",
-      cache: "no-store"
+      cache: "no-store",
     });
 
     if (!response.ok) {
       const errorBody = await response.text();
       throw new Error(
-        `Coinbase balances request failed with status ${response.status}: ${errorBody}`
+        `Coinbase balances request failed with status ${response.status}: ${errorBody}`,
       );
     }
 
@@ -183,10 +150,7 @@ async function fetchCoinbaseAccounts() {
 
 function isAuthorized(request: NextRequest) {
   const accessToken = process.env.COINBASE_BALANCES_ACCESS_TOKEN;
-
-  if (!accessToken) {
-    return true;
-  }
+  if (!accessToken) return true;
 
   return request.headers.get("authorization") === `Bearer ${accessToken}`;
 }
@@ -202,7 +166,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       accounts: accounts.map(getSafeAccount),
       count: accounts.length,
-      fetchedAt: new Date().toISOString()
+      fetchedAt: new Date().toISOString(),
     });
   } catch (error) {
     console.error("Coinbase balances error", error);
@@ -212,9 +176,9 @@ export async function GET(request: NextRequest) {
         error:
           error instanceof Error && error.message.includes("not configured")
             ? error.message
-            : "Coinbase balances could not be retrieved."
+            : "Coinbase balances could not be retrieved.",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
