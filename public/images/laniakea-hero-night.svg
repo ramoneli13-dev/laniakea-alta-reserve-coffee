@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Laniakea premium night coffee landscape</title>
+  <desc id="desc">A luxurious night sky, mountains inspired by Norte de Santander, warm valley lights and a premium coffee cup.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#04070d"/>
+      <stop offset="0.55" stop-color="#0b1520"/>
+      <stop offset="1" stop-color="#1a120d"/>
+    </linearGradient>
+    <radialGradient id="milky" cx="72%" cy="15%" r="55%">
+      <stop offset="0" stop-color="#d7c1a3" stop-opacity=".32"/>
+      <stop offset=".32" stop-color="#8da7c2" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mountainA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#18202a"/>
+      <stop offset="1" stop-color="#090b0e"/>
+    </linearGradient>
+    <linearGradient id="mountainB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#23190f"/>
+      <stop offset="1" stop-color="#0b0a09"/>
+    </linearGradient>
+    <linearGradient id="table" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1b0f09"/>
+      <stop offset=".55" stop-color="#3a2213"/>
+      <stop offset="1" stop-color="#140b07"/>
+    </linearGradient>
+    <linearGradient id="cup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2d2118"/>
+      <stop offset=".45" stop-color="#120f0d"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <filter id="blur20"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <rect width="1920" height="650" fill="url(#milky)"/>
+
+  <g fill="#fff">
+    <circle cx="90" cy="100" r="1.5" opacity=".8"/><circle cx="165" cy="145" r="1" opacity=".9"/><circle cx="240" cy="82" r="1.3" opacity=".75"/>
+    <circle cx="330" cy="190" r="1.2" opacity=".9"/><circle cx="430" cy="115" r="1.6" opacity=".85"/><circle cx="520" cy="210" r="1" opacity=".8"/>
+    <circle cx="630" cy="90" r="1.4" opacity=".9"/><circle cx="745" cy="160" r="1.1" opacity=".8"/><circle cx="860" cy="70" r="1.5" opacity=".9"/>
+    <circle cx="980" cy="125" r="1" opacity=".85"/><circle cx="1080" cy="55" r="1.4" opacity=".8"/><circle cx="1190" cy="170" r="1.6" opacity=".9"/>
+    <circle cx="1310" cy="95" r="1.2" opacity=".8"/><circle cx="1435" cy="140" r="1.5" opacity=".92"/><circle cx="1545" cy="75" r="1" opacity=".8"/>
+    <circle cx="1670" cy="185" r="1.6" opacity=".88"/><circle cx="1800" cy="105" r="1.2" opacity=".9"/>
+  </g>
+  <g fill="#d7c1a3" opacity=".75" filter="url(#glow)">
+    <circle cx="1030" cy="180" r="2.2"/><circle cx="1120" cy="230" r="1.7"/><circle cx="1210" cy="145" r="2"/>
+    <circle cx="1320" cy="210" r="1.5"/><circle cx="1410" cy="165" r="1.8"/><circle cx="1510" cy="245" r="1.4"/>
+  </g>
+
+  <path d="M0 710 L180 650 L330 690 L520 590 L700 655 L880 540 L1060 610 L1230 500 L1420 585 L1600 470 L1780 560 L1920 515 L1920 880 L0 880 Z" fill="url(#mountainA)"/>
+  <path d="M0 790 L220 735 L430 785 L620 690 L810 760 L1010 665 L1220 750 L1430 640 L1635 735 L1920 655 L1920 900 L0 900 Z" fill="url(#mountainB)" opacity=".95"/>
+  <path d="M0 850 C260 780 470 840 700 805 C940 768 1190 835 1450 785 C1620 750 1760 770 1920 740 L1920 910 L0 910 Z" fill="#070908" opacity=".96"/>
+
+  <g fill="#d9a44d" opacity=".9" filter="url(#glow)">
+    <circle cx="720" cy="790" r="2"/><circle cx="760" cy="782" r="1.5"/><circle cx="802" cy="801" r="2.2"/>
+    <circle cx="970" cy="775" r="1.8"/><circle cx="1008" cy="768" r="2"/><circle cx="1070" cy="789" r="1.4"/>
+    <circle cx="1360" cy="750" r="1.7"/><circle cx="1402" cy="744" r="2.1"/><circle cx="1460" cy="758" r="1.5"/>
+  </g>
+
+  <rect y="865" width="1920" height="215" fill="url(#table)"/>
+  <path d="M0 930 H1920" stroke="#6f4122" stroke-opacity=".35" stroke-width="3"/>
+  <path d="M0 1002 H1920" stroke="#8b542d" stroke-opacity=".18" stroke-width="2"/>
+
+  <g transform="translate(1355 720)">
+    <ellipse cx="160" cy="250" rx="225" ry="42" fill="#000" opacity=".45" filter="url(#blur20)"/>
+    <ellipse cx="158" cy="205" rx="150" ry="42" fill="#0b0908" stroke="#8b6738" stroke-width="4"/>
+    <path d="M55 65 h225 v95 c0 70-48 105-112 105S55 230 55 160Z" fill="url(#cup)" stroke="#9b7443" stroke-width="5"/>
+    <ellipse cx="168" cy="66" rx="112" ry="28" fill="#3a1e10" stroke="#b58b52" stroke-width="5"/>
+    <ellipse cx="168" cy="67" rx="95" ry="18" fill="#120805"/>
+    <path d="M280 95 C360 90 365 200 290 202" fill="none" stroke="#1a1410" stroke-width="24" stroke-linecap="round"/>
+    <path d="M280 95 C350 98 350 190 292 192" fill="none" stroke="#9b7443" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+    <rect x="132" y="132" width="72" height="56" rx="8" fill="none" stroke="#c9a45c" stroke-width="3"/>
+    <text x="168" y="169" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#c9a45c" letter-spacing="2">LA</text>
+    <g fill="none" stroke="#d9d2c5" stroke-linecap="round" opacity=".45">
+      <path d="M140 30 C118 -10 164 -30 146 -68" stroke-width="6"/>
+      <path d="M180 28 C158 -8 203 -32 188 -75" stroke-width="5"/>
+      <path d="M215 35 C194 2 232 -22 220 -55" stroke-width="4"/>
+    </g>
+    <g fill="#3b2517" stroke="#8c5d38" stroke-width="1.5">
+      <ellipse cx="15" cy="238" rx="13" ry="8" transform="rotate(-20 15 238)"/>
+      <ellipse cx="48" cy="252" rx="13" ry="8" transform="rotate(18 48 252)"/>
+      <ellipse cx="320" cy="246" rx="13" ry="8" transform="rotate(-8 320 246)"/>
+      <ellipse cx="355" cy="231" rx="13" ry="8" transform="rotate(22 355 231)"/>
+    </g>
+  </g>
+
+  <rect width="1920" height="1080" fill="url(#milky)" opacity=".22"/>
+  <rect width="1920" height="1080" fill="url(#sky)" opacity=".06"/>
+  <rect width="1100" height="1080" fill="url(#sky)" opacity=".44"/>
+</svg>
