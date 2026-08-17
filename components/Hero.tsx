@@ -3,18 +3,11 @@ import Image from "next/image";
 export function Hero() {
   return (
     <section id="home" className="relative isolate overflow-hidden bg-coffee-black">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/laniakea-cover.jpg"
-          alt="Laniakea Alta Reserve Coffee en origen colombiano"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,164,92,0.12),transparent_48%)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-coffee-black via-coffee-black/82 to-coffee-black/45" />
-        <div className="absolute inset-0 bg-coffee-black/35" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_82%_48%,rgba(201,164,92,0.2),transparent_34%),radial-gradient(ellipse_at_18%_8%,rgba(118,75,43,0.28),transparent_42%),linear-gradient(135deg,#090604_0%,#160e09_52%,#080503_100%)]"
+      >
+        <div className="absolute inset-0 opacity-35 [background-image:linear-gradient(rgba(201,164,92,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(201,164,92,0.08)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:linear-gradient(to_bottom,black,transparent_82%)]" />
       </div>
 
       <div className="relative z-10 mx-auto grid min-h-[100svh] w-full max-w-7xl items-center gap-8 px-5 py-16 md:min-h-screen md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-20">
