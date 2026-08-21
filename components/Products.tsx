@@ -7,10 +7,8 @@ type ProductsProps = {
 };
 
 export function Products({ products, onAddToCart }: ProductsProps) {
-  const [featured, ...rest] = products;
-
   return (
-    <section id="products" className="bg-[#120c08] px-5 py-24 md:px-8">
+    <section id="products" className="bg-[#120c08] px-5 py-20 md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 grid gap-6 md:grid-cols-[1.15fr_0.85fr] md:items-end">
           <div>
@@ -27,14 +25,8 @@ export function Products({ products, onAddToCart }: ProductsProps) {
           </p>
         </div>
 
-        {featured ? (
-          <div className="mb-8 rounded-sm border border-coffee-gold/30 bg-coffee-espresso/60 p-3 md:p-4">
-            <ProductCard product={featured} onAddToCart={onAddToCart} />
-          </div>
-        ) : null}
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {rest.map((product) => (
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} onAddToCart={onAddToCart} />
           ))}
         </div>
