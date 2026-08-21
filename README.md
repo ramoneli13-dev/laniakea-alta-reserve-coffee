@@ -96,3 +96,7 @@ Si configuras `COINBASE_BALANCES_ACCESS_TOKEN`, llama la ruta con:
 ```bash
 curl -H "Authorization: Bearer $COINBASE_BALANCES_ACCESS_TOKEN" http://localhost:3000/api/coinbase/balances
 ```
+
+## Entrega de correo
+
+Los formularios usan Resend. Configura `RESEND_API_KEY` en Vercel para Production y Preview. Después de renovar la clave, crea un nuevo despliegue para que las funciones usen el valor actualizado.
