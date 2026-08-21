@@ -8,7 +8,8 @@ import {
 
 export const runtime = "nodejs";
 
-const CONTACT_EMAIL = process.env.CONTACT_TO_EMAIL || "ramoneli13@gmail.com";
+const CONTACT_EMAIL =
+  process.env.BUSINESS_CONTACT_TO_EMAIL || "laniakea280@gmail.com";
 const DEFAULT_FROM_EMAIL = "onboarding@resend.dev";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -162,7 +163,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (!EMAIL_REGEX.test(CONTACT_EMAIL)) {
-    console.error("Contact email is not configured: invalid CONTACT_TO_EMAIL.");
+    console.error("Contact email is not configured: invalid BUSINESS_CONTACT_TO_EMAIL.");
     return NextResponse.json(
       { code: "invalid_contact_email", error: "Email destination is not configured." },
       { status: 500 }

@@ -9,7 +9,7 @@ const sections = [
     "Recopilamos la información que nos entregas voluntariamente, como nombre, correo, teléfono, empresa, ubicación general y contenido de tus mensajes o pedidos.",
     "Usamos esos datos para responder consultas, procesar solicitudes comerciales, prestar servicio al cliente, prevenir fraude y cumplir obligaciones legales. No vendemos tu información personal.",
     "Podemos compartir datos con proveedores que ayudan a operar el sitio, procesar pagos, enviar correos o entregar pedidos, únicamente para prestar esos servicios. Conservamos la información durante el tiempo razonablemente necesario para esos fines y para cumplir la ley.",
-    "Puedes solicitar acceso, corrección o eliminación de tus datos escribiendo a ramoneli13@gmail.com. Verificaremos la solicitud antes de responder. No discriminamos a quien ejerza los derechos que le correspondan bajo la ley de California.",
+    "Puedes solicitar acceso, corrección o eliminación de tus datos escribiendo a laniakea280@gmail.com. Verificaremos la solicitud antes de responder. No discriminamos a quien ejerza los derechos que le correspondan bajo la ley de California.",
   ]},
   { id: "terms", title: "Términos de Uso y Venta", body: [
     "Al usar este sitio aceptas estos términos. La información del sitio puede actualizarse sin previo aviso. Las imágenes identificadas como referencia no sustituyen la presentación final del producto.",
@@ -36,7 +36,7 @@ export default function LegalPage() {
         <p className="mt-5 max-w-2xl leading-7 text-coffee-cream/70">Vigentes desde el 21 de agosto de 2026. Estas políticas describen cómo operamos el sitio y atendemos tus datos y compras.</p>
         <nav className="mt-10 flex flex-wrap gap-3">{sections.map(section => <a key={section.id} href={`#${section.id}`} className="border border-coffee-gold/30 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-coffee-gold">{section.title}</a>)}</nav>
         <div className="mt-16 grid gap-16">{sections.map(section => <section key={section.id} id={section.id} className="scroll-mt-8 border-t border-coffee-gold/25 pt-8"><h2 className="font-serif text-3xl text-coffee-parchment md:text-4xl">{section.title}</h2><div className="mt-6 grid gap-5">{section.body.map(paragraph => <p key={paragraph} className="max-w-3xl leading-8 text-coffee-cream/72">{paragraph}</p>)}</div></section>)}</div>
-        <aside className="mt-16 border border-coffee-gold/30 bg-coffee-espresso p-6"><h2 className="font-serif text-2xl text-coffee-parchment">Contacto sobre estas políticas</h2><p className="mt-3 leading-7 text-coffee-cream/72">Laniakea Alta Reserve Coffee LLC · California, Estados Unidos<br />Correo: <a className="text-coffee-gold underline" href="mailto:ramoneli13@gmail.com">ramoneli13@gmail.com</a> · WhatsApp: <a className="text-coffee-gold underline" href="https://wa.me/16502008821">+1 (650) 200-8821</a></p></aside>
+        <aside className="mt-16 border border-coffee-gold/30 bg-coffee-espresso p-6"><h2 className="font-serif text-2xl text-coffee-parchment">Contacto sobre estas políticas</h2><p className="mt-3 leading-7 text-coffee-cream/72">Laniakea Alta Reserve Coffee LLC · California, Estados Unidos<br />Correo: <a className="text-coffee-gold underline" href="mailto:laniakea280@gmail.com">laniakea280@gmail.com</a> · WhatsApp: <a className="text-coffee-gold underline" href="https://wa.me/16502008821">+1 (650) 200-8821</a></p></aside>
       </article>
       <Footer />
     </main>
