@@ -9,6 +9,7 @@ type HeaderProps = {
 const navLinks = [
   { href: "#story", label: "Historia" },
   { href: "#products", label: "Café" },
+  { href: "#faq", label: "Preguntas" },
   { href: "#wholesale", label: "Venta al por mayor" },
   { href: "#contact", label: "Contacto" },
 ];

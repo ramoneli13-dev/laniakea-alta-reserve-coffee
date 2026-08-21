@@ -8,6 +8,9 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Products } from "@/components/Products";
 import { BrandSections } from "@/components/BrandSections";
+import { CoffeeGuide } from "@/components/CoffeeGuide";
+import { FAQ } from "@/components/FAQ";
+import { TrustBar } from "@/components/TrustBar";
 import { products } from "@/data/products";
 import type { CartItem, Product } from "@/types";
 
@@ -76,7 +79,9 @@ export default function Home() {
     <main>
       <Header cartCount={cartCount} />
       <Hero />
+      <TrustBar />
       <BrandSections />
+      <CoffeeGuide />
       <Products products={products} onAddToCart={addToCart} />
       <Cart
         cartItems={cartItems}
@@ -85,6 +90,7 @@ export default function Home() {
         checkoutError={checkoutError}
         checkoutLoading={checkoutLoading}
       />
+      <FAQ />
       <Contact />
       <Footer />
     </main>
