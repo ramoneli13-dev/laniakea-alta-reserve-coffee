@@ -10,23 +10,19 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative isolate min-h-[100svh] overflow-hidden bg-[linear-gradient(135deg,#3a1f12_0%,#5a2f18_48%,#9b5b31_100%)] text-coffee-cream"
+      className="relative isolate min-h-[100svh] overflow-hidden bg-[#17150f] text-coffee-cream"
     >
-      <div className="absolute inset-y-0 right-0 hidden w-[58%] lg:block">
-        <Image
-          src="/images/laniakea-cover-sunset.jpg"
-          alt="Empaque de café Laniakea Alta Reserve en un atardecer cálido inspirado en Portola, California"
-          fill
-          priority
-          sizes="58vw"
-          className="object-cover object-[76%_center]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#3a1f12] via-[#3a1f12]/16 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3a1f12]/50 via-transparent to-[#5a2f18]/10" />
-      </div>
-
-      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#2a1208]/42 to-transparent" />
-      <div className="absolute left-[-8rem] top-1/3 h-80 w-80 rounded-full bg-[#efb36a]/24 blur-[120px]" />
+      <Image
+        src="/images/laniakea-cover-portola-neutral.jpg"
+        alt="Empaque de café Laniakea Alta Reserve frente a un atardecer natural inspirado en Portola, California"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[68%_center] sm:object-[64%_center] lg:object-center"
+      />
+      <div className="absolute inset-0 bg-black/12" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#11110f]/92 via-[#171711]/64 to-transparent lg:via-[#171711]/38" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#11110f]/72 via-transparent to-[#11110f]/24" />
 
       <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col px-5 pb-8 pt-28 md:px-8 md:pb-10 md:pt-36 lg:justify-center lg:pb-32 lg:pt-32">
         <div className="max-w-[680px]">
@@ -62,21 +58,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative mt-12 overflow-hidden border border-coffee-gold/20 lg:hidden">
-          <div className="relative aspect-[16/10] sm:aspect-[16/8]">
-            <Image
-              src="/images/laniakea-cover-sunset.jpg"
-              alt="Empaque de café Laniakea Alta Reserve en un atardecer cálido inspirado en Portola, California"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-[76%_center]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#3a1f12]/14 to-transparent" />
-          </div>
-        </div>
-
-        <div className="mt-auto grid border-y border-coffee-gold/24 bg-[#3a1f12]/76 backdrop-blur-sm sm:grid-cols-3 lg:absolute lg:inset-x-8 lg:bottom-10 lg:mt-0">
+        <div className="mt-auto grid border-y border-coffee-gold/24 bg-[#17150f]/72 backdrop-blur-md sm:grid-cols-3 lg:absolute lg:inset-x-8 lg:bottom-10 lg:mt-0">
           {brandProof.map(([label, value], index) => (
             <div
               key={label}
