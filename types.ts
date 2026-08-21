@@ -6,6 +6,8 @@ export type Product = {
   size: string;
   image: string;
   notes: string[];
+  origin: string;
+  idealFor: string;
 };
 
 export type CartItem = Product & {
