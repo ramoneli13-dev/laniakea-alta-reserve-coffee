@@ -11,23 +11,11 @@ type ContactResponse = {
 };
 
 function getErrorMessage(code?: string) {
-  if (code === "missing_resend_api_key") {
-    return "El formulario todavía no tiene configurado RESEND_API_KEY en Vercel.";
-  }
-
   if (code === "invalid_contact_email") {
-    return "El correo de destino del formulario no está configurado correctamente.";
+    return "No pudimos recibir tu mensaje en este momento. Escríbenos a laniakea280@gmail.com o por WhatsApp al +1 (650) 200-8821.";
   }
 
-  if (code === "resend_rejected") {
-    return "Resend rechazó el envío. Revisa que RESEND_FROM_EMAIL use un dominio verificado en Resend.";
-  }
-
-  if (code === "email_request_failed") {
-    return "No pudimos conectar con el servicio de correo. Por favor intenta nuevamente.";
-  }
-
-  return "No pudimos enviar tu mensaje en este momento. Por favor intenta nuevamente.";
+  return "No pudimos enviar tu mensaje en este momento. Escríbenos a laniakea280@gmail.com o por WhatsApp al +1 (650) 200-8821.";
 }
 
 export function Contact() {
