@@ -14,7 +14,7 @@ export function Hero() {
     >
       <div className="absolute inset-y-0 right-0 hidden w-[58%] lg:block">
         <Image
-          src="/images/laniakea-cover-sunset.png"
+          src="/images/laniakea-cover-sunset.jpg"
           alt="Empaque de café Laniakea Alta Reserve en un atardecer cálido inspirado en Portola, California"
           fill
           priority
@@ -65,7 +65,7 @@ export function Hero() {
         <div className="relative mt-12 overflow-hidden border border-coffee-gold/20 lg:hidden">
           <div className="relative aspect-[16/10] sm:aspect-[16/8]">
             <Image
-              src="/images/laniakea-cover-sunset.png"
+              src="/images/laniakea-cover-sunset.jpg"
               alt="Empaque de café Laniakea Alta Reserve en un atardecer cálido inspirado en Portola, California"
               fill
               priority
