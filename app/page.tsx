@@ -11,6 +11,8 @@ import { BrandSections } from "@/components/BrandSections";
 import { CoffeeGuide } from "@/components/CoffeeGuide";
 import { FAQ } from "@/components/FAQ";
 import { TrustBar } from "@/components/TrustBar";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { WholesaleForm } from "@/components/WholesaleForm";
 import { products } from "@/data/products";
 import type { CartItem, Product } from "@/types";
 
@@ -91,8 +93,10 @@ export default function Home() {
         checkoutLoading={checkoutLoading}
       />
       <FAQ />
+      <WholesaleForm />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </main>
   );
 }
