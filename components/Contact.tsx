@@ -65,6 +65,7 @@ export function Contact() {
           phone: String(formData.get("phone") || "").trim(),
           inquiryType: String(formData.get("inquiryType") || "").trim(),
           message: String(formData.get("message") || "").trim(),
+          website: String(formData.get("website") || "").trim(),
         }),
       });
 
@@ -123,6 +124,14 @@ export function Contact() {
           onSubmit={handleSubmit}
           className="grid gap-5 border border-coffee-gold/35 bg-coffee-espresso p-6 shadow-luxury"
         >
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute -left-[10000px] h-px w-px overflow-hidden"
+          />
           <label className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-coffee-gold">
             Nombre
             <input
@@ -131,6 +140,7 @@ export function Contact() {
               autoComplete="name"
               className="min-h-12 border border-coffee-gold/25 bg-coffee-black px-4 text-base normal-case tracking-normal text-coffee-cream outline-none transition focus:border-coffee-gold"
               placeholder="Tu nombre"
+              maxLength={100}
             />
           </label>
           <label className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-coffee-gold">
@@ -142,6 +152,7 @@ export function Contact() {
               autoComplete="email"
               className="min-h-12 border border-coffee-gold/25 bg-coffee-black px-4 text-base normal-case tracking-normal text-coffee-cream outline-none transition focus:border-coffee-gold"
               placeholder="tu@email.com"
+              maxLength={254}
             />
           </label>
           <label className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-coffee-gold">
@@ -152,6 +163,7 @@ export function Contact() {
               autoComplete="tel"
               className="min-h-12 border border-coffee-gold/25 bg-coffee-black px-4 text-base normal-case tracking-normal text-coffee-cream outline-none transition focus:border-coffee-gold"
               placeholder="(555) 000-0000"
+              maxLength={40}
             />
           </label>
           <label className="grid gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-coffee-gold">
@@ -177,6 +189,7 @@ export function Contact() {
               rows={5}
               className="resize-none border border-coffee-gold/25 bg-coffee-black px-4 py-3 text-base normal-case tracking-normal text-coffee-cream outline-none transition focus:border-coffee-gold"
               placeholder="Cuéntanos qué estás buscando..."
+              maxLength={4000}
             />
           </label>
           <button

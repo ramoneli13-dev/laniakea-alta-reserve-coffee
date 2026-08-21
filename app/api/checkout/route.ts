@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
 import { products } from "@/data/products";
+import { getClientAddress, hasValidRequestOrigin, isRateLimited } from "@/lib/requestSecurity";
+import { getStripe } from "@/lib/stripe";
 import type { CheckoutLineItem } from "@/types";
 
 export const runtime = "nodejs";
@@ -23,23 +24,17 @@ function getValidatedItems(items: CheckoutLineItem[]) {
 }
 
 export async function POST(request: NextRequest) {
-  const secretKey = process.env.STRIPE_SECRET_KEY;
-
-  if (!secretKey) {
-    return NextResponse.json(
-      { error: "Stripe is not configured. Add STRIPE_SECRET_KEY to .env.local." },
-      { status: 500 }
-    );
+  if (!hasValidRequestOrigin(request)) {
+    return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
   }
 
-  if (!secretKey.startsWith("sk_")) {
-    return NextResponse.json(
-      {
-        error:
-          "Stripe secret key is invalid. STRIPE_SECRET_KEY must start with sk_test_ or sk_live_."
-      },
-      { status: 500 }
-    );
+  if (isRateLimited(`checkout:${getClientAddress(request)}`, 10, 15 * 60_000)) {
+    return NextResponse.json({ error: "Too many checkout attempts." }, { status: 429 });
+  }
+
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > 16_000) {
+    return NextResponse.json({ error: "Request is too large." }, { status: 413 });
   }
 
   try {
@@ -49,7 +44,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
     }
 
-    const stripe = new Stripe(secretKey);
+    const stripe = getStripe();
     const appUrl = getAppUrl(request);
     const validatedItems = getValidatedItems(body.items);
 
@@ -84,13 +79,10 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Stripe Checkout could not be created."
+        error: "Stripe Checkout could not be created."
       },
       { status: 400 }
     );

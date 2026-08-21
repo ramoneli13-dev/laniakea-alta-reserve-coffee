@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import {
   BtcPredictionRecord,
   calculateStats,
@@ -9,12 +10,24 @@ import {
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+function isUnavailableOnVercel() {
+  return Boolean(process.env.VERCEL);
+}
+
+function unavailableResponse() {
+  return NextResponse.json(
+    { error: "Prediction storage is disabled until durable private storage is connected." },
+    { status: 503 }
+  );
+}
+
 function toNumber(value: unknown) {
   const numberValue = Number(value);
   return Number.isFinite(numberValue) ? numberValue : undefined;
 }
 
 export async function GET() {
+  if (isUnavailableOnVercel()) return unavailableResponse();
   const predictions = await readPredictions();
 
   return NextResponse.json({
@@ -23,7 +36,8 @@ export async function GET() {
   });
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  if (isUnavailableOnVercel()) return unavailableResponse();
   const body = (await request.json()) as Partial<BtcPredictionRecord>;
   const initialPrice = toNumber(body.initialPrice);
   const currentPrice = toNumber(body.currentPrice);

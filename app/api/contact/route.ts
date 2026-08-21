@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  getClientAddress,
+  hasBearerToken,
+  hasValidRequestOrigin,
+  isRateLimited,
+} from "@/lib/requestSecurity";
 
 export const runtime = "nodejs";
 
@@ -12,7 +18,10 @@ type ContactPayload = {
   phone?: string;
   inquiryType?: string;
   message: string;
+  website?: string;
 };
+
+const FIELD_LIMITS = { name: 100, email: 254, phone: 40, inquiryType: 80, message: 4_000 };
 
 function getString(body: Record<string, unknown>, key: keyof ContactPayload) {
   const value = body[key];
@@ -75,6 +84,21 @@ function buildEmailText(payload: ContactPayload) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!hasValidRequestOrigin(request)) {
+    return NextResponse.json({ code: "invalid_origin", error: "Invalid request origin." }, { status: 403 });
+  }
+
+  const contentLength = Number(request.headers.get("content-length") || 0);
+  if (contentLength > 32_000) {
+    return NextResponse.json({ code: "payload_too_large", error: "Request is too large." }, { status: 413 });
+  }
+
+  const trusted = hasBearerToken(request, process.env.CONTACT_FORM_ACCESS_TOKEN);
+  const address = getClientAddress(request);
+  if (!trusted && isRateLimited(`contact:${address}`, 5, 15 * 60_000)) {
+    return NextResponse.json({ code: "rate_limited", error: "Too many requests." }, { status: 429 });
+  }
+
   let body: Record<string, unknown>;
 
   try {
@@ -92,7 +116,12 @@ export async function POST(request: NextRequest) {
     phone: getString(body, "phone"),
     inquiryType: getString(body, "inquiryType"),
     message: getString(body, "message"),
+    website: getString(body, "website"),
   };
+
+  if (payload.website) {
+    return NextResponse.json({ ok: true });
+  }
 
   if (!payload.name || !payload.email || !payload.message) {
     return NextResponse.json(
@@ -104,6 +133,19 @@ export async function POST(request: NextRequest) {
   if (!EMAIL_REGEX.test(payload.email)) {
     return NextResponse.json(
       { code: "invalid_email", error: "A valid email is required." },
+      { status: 400 }
+    );
+  }
+
+  if (
+    payload.name.length > FIELD_LIMITS.name ||
+    payload.email.length > FIELD_LIMITS.email ||
+    (payload.phone?.length || 0) > FIELD_LIMITS.phone ||
+    (payload.inquiryType?.length || 0) > FIELD_LIMITS.inquiryType ||
+    payload.message.length > FIELD_LIMITS.message
+  ) {
+    return NextResponse.json(
+      { code: "fields_too_long", error: "One or more fields are too long." },
       { status: 400 }
     );
   }
