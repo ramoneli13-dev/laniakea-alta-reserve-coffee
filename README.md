@@ -1,6 +1,6 @@
 # Laniakea Alta Reserve Coffee
 
-Web app inicial para **Laniakea Alta Reserve Coffee LLC**, una marca premium de cafe colombiano de Gramalote, Norte de Santander, creada en California.
+Web app inicial para **Laniakea Alta Reserve Coffee LLC**, una marca premium de cafe colombiano de Ragonvalia, Norte de Santander, creada en California.
 
 ## Estructura
 

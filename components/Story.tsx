@@ -31,13 +31,13 @@ export function Story() {
               and excellence, created to share the finest essence of Colombian coffee.
             </p>
             <p>
-              Our coffee comes from Gramalote, Norte de Santander, Colombia, a mountain
+              Our coffee comes from Ragonvalia, Norte de Santander, Colombia, a mountain
               region with the character, altitude, and heritage behind an exceptional cup.
             </p>
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {["Gramalote Origin", "California Vision", "Alta Reserve"].map((item) => (
+            {["Ragonvalia Origin", "California Vision", "Alta Reserve"].map((item) => (
               <div key={item} className="border border-coffee-gold/40 bg-white/55 p-5">
                 <span className="text-sm font-bold uppercase tracking-[0.18em] text-coffee-roast">
                   {item}

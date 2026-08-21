@@ -5,11 +5,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://laniakeacoffeee.com"),
   title: "Laniakea Alta Reserve Coffee",
   description:
-    "Premium Colombian coffee from Gramalote, Norte de Santander, Colombia, crafted for California and the United States.",
+    "Premium Colombian coffee from Ragonvalia, Norte de Santander, Colombia, crafted for California and the United States.",
   openGraph: {
     title: "Laniakea Alta Reserve Coffee",
     description:
-      "Premium Colombian coffee from Gramalote, Norte de Santander, Colombia, crafted for California and the United States.",
+      "Premium Colombian coffee from Ragonvalia, Norte de Santander, Colombia, crafted for California and the United States.",
     url: "https://laniakeacoffeee.com",
     siteName: "Laniakea Alta Reserve Coffee",
     images: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Laniakea Alta Reserve Coffee",
     description:
-      "Premium Colombian coffee from Gramalote, Norte de Santander, Colombia, crafted for California and the United States.",
+      "Premium Colombian coffee from Ragonvalia, Norte de Santander, Colombia, crafted for California and the United States.",
     images: ["/images/laniakea-cover.jpg"]
   }
 };
