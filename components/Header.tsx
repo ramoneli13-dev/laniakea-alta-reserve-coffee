@@ -40,7 +40,7 @@ export function Header({ cartCount }: HeaderProps) {
     <>
       <header className="fixed inset-x-0 top-3 z-50 px-3 md:top-5 md:px-6">
         <div
-          className={`relative mx-auto flex h-12 max-w-5xl items-center justify-between rounded-[8px] border px-3 text-coffee-cream transition-all duration-300 md:h-[54px] md:px-4 ${
+          className={`relative mx-auto flex h-12 max-w-7xl items-center justify-between rounded-[8px] border px-3 text-coffee-cream transition-all duration-300 md:h-[54px] md:px-4 ${
             isScrolled
               ? "border-coffee-gold/28 bg-coffee-black/82 shadow-luxury backdrop-blur-xl"
               : "border-coffee-gold/10 bg-coffee-black/18 shadow-none backdrop-blur-sm"
