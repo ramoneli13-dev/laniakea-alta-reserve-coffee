@@ -10,23 +10,23 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative isolate min-h-[100svh] overflow-hidden bg-[#090705] text-coffee-cream"
+      className="relative isolate min-h-[100svh] overflow-hidden bg-[linear-gradient(135deg,#3a1f12_0%,#5a2f18_48%,#9b5b31_100%)] text-coffee-cream"
     >
-      <div className="absolute inset-y-0 right-0 hidden w-[52%] lg:block">
+      <div className="absolute inset-y-0 right-0 hidden w-[58%] lg:block">
         <Image
-          src="/images/laniakea-cover.jpg"
-          alt="Empaque de café Laniakea Alta Reserve rodeado de granos de café"
+          src="/images/laniakea-cover-sunset.jpg"
+          alt="Empaque de café Laniakea Alta Reserve en un atardecer cálido inspirado en Portola, California"
           fill
           priority
-          sizes="52vw"
-          className="object-cover object-[72%_center]"
+          sizes="58vw"
+          className="object-cover object-[76%_center]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#090705] via-[#090705]/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#090705] via-transparent to-[#090705]/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#3a1f12] via-[#3a1f12]/16 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#3a1f12]/50 via-transparent to-[#5a2f18]/10" />
       </div>
 
-      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/65 to-transparent" />
-      <div className="absolute left-[-8rem] top-1/3 h-80 w-80 rounded-full bg-coffee-gold/10 blur-[120px]" />
+      <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#2a1208]/42 to-transparent" />
+      <div className="absolute left-[-8rem] top-1/3 h-80 w-80 rounded-full bg-[#efb36a]/24 blur-[120px]" />
 
       <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col px-5 pb-8 pt-28 md:px-8 md:pb-10 md:pt-36 lg:justify-center lg:pb-32 lg:pt-32">
         <div className="max-w-[680px]">
@@ -65,18 +65,18 @@ export function Hero() {
         <div className="relative mt-12 overflow-hidden border border-coffee-gold/20 lg:hidden">
           <div className="relative aspect-[16/10] sm:aspect-[16/8]">
             <Image
-              src="/images/laniakea-cover.jpg"
-              alt="Empaque de café Laniakea Alta Reserve rodeado de granos de café"
+              src="/images/laniakea-cover-sunset.jpg"
+              alt="Empaque de café Laniakea Alta Reserve en un atardecer cálido inspirado en Portola, California"
               fill
               priority
               sizes="100vw"
               className="object-cover object-[76%_center]"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#090705]/35 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#3a1f12]/14 to-transparent" />
           </div>
         </div>
 
-        <div className="mt-auto grid border-y border-coffee-gold/18 bg-[#090705]/70 backdrop-blur-sm sm:grid-cols-3 lg:absolute lg:inset-x-8 lg:bottom-10 lg:mt-0">
+        <div className="mt-auto grid border-y border-coffee-gold/24 bg-[#3a1f12]/76 backdrop-blur-sm sm:grid-cols-3 lg:absolute lg:inset-x-8 lg:bottom-10 lg:mt-0">
           {brandProof.map(([label, value], index) => (
             <div
               key={label}
