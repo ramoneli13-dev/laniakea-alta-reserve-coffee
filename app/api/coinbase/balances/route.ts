@@ -1,5 +1,6 @@
 import { createPrivateKey, randomBytes, sign } from "node:crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { hasBearerToken } from "@/lib/requestSecurity";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -151,12 +152,14 @@ async function fetchCoinbaseAccounts() {
 
 function isAuthorized(request: NextRequest) {
   const accessToken = process.env.COINBASE_BALANCES_ACCESS_TOKEN;
-  if (!accessToken) return true;
-
-  return request.headers.get("authorization") === `Bearer ${accessToken}`;
+  return hasBearerToken(request, accessToken);
 }
 
 export async function GET(request: NextRequest) {
+  if (!process.env.COINBASE_BALANCES_ACCESS_TOKEN) {
+    return NextResponse.json({ error: "Service unavailable." }, { status: 503 });
+  }
+
   if (!isAuthorized(request)) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
   }
